@@ -18,13 +18,15 @@ named_attribute_parserはハッシュ形式で渡された引数をパースし�
        named_attributes(args, name: "", age: 19, address: "TOKYO-TO")
 
      # なにか処理を行う...
+     [name, age, address]
    end
 
    def block_set(*args)
-     named_attributes(args, :name, :age, address: "TOKYO") do 
+     named_attributes(args, :name, :age, address: "TOKYO-TO") do 
        |name, age, address|
 
        # なにか処理を行う...
+       [name, age, address]
      end
    end
 
@@ -52,16 +54,16 @@ Ruby1.9から使えるようになった名前付き引数で呼び出します�
 そうでない場合は特に必要ではありません。
 
 == INSTALL:
-$ git clone git://github.com/hiroeorz/named_attribute_parser.git
-$ cd named_attribute_parser
-$ rake package (if you build yourself)
-# sudo gem install pkg/named_attribute_parser-0.0.1.gem
+ $ git clone git://github.com/hiroeorz/named_attribute_parser.git
+ $ cd named_attribute_parser
+ $ rake package (if you build yourself)
+ # sudo gem install pkg/named_attribute_parser-0.0.1.gem
 
 == LICENSE:
 
 (The MIT License)
 
-Copyright (c) 2011 FIXME full name
+Copyright (c) 2011 HIROE Shin
 
 Permission is hereby granted, free of charge, to any person obtaining
 a copy of this software and associated documentation files (the
