@@ -10,32 +10,52 @@ named_attribute_parserはハッシュ形式で渡された引数をパースし�
 
 == SYNOPSIS:
 
-class MyClass
-  include NamedAttributeParser
+ class MyClass
+   include NamedAttributeParser
 
-  def set(*args)
-    name, age, address = 
-      named_attributes(args, name: "", age: 19, address: "TOKYO")
+   def set(*args)
+     name, age, address = 
+       named_attributes(args, name: "", age: 19, address: "TOKYO-TO")
 
-    # なにか処理を行う...
-  end
+     # なにか処理を行う...
+   end
 
-  def block_set(*args)
-    named_attributes(args, :name, :age, address: "TOKYO") do 
-      |name, age, address|
+   def block_set(*args)
+     named_attributes(args, :name, :age, address: "TOKYO") do 
+       |name, age, address|
 
-      # なにか処理を行う...
-    end
-  end
+       # なにか処理を行う...
+     end
+   end
 
-end
+ end
+
+Ruby1.9から使えるようになった名前付き引数で呼び出します。
+ sample = Sample.new
+ sample.set(name: "shin", age: 36, address: "MATSUE-SHI")
+ #=> ["shin", 36, "MATSUE-SHI"]
+
+ sample.block_set(name: "shin", age: 36, address: "MATSUE-SHI")
+ #=> ["shin", 36, "MATSUE-SHI"]
+
+デフォルト値が与えられている場合は省略出来ます。
+ sample.set(name: "shin", age: 36)
+ #=> ["shin", 36, "TOKYO-TO"]
+
+デフォルト値が与えられていないのに値が与えられなかった場合はArguemntErrorをraiseします。
+ sample.set()
+ ArgumentError: named argument 'name' is not given 
+
 
 == REQUIREMENTS:
 テストを走らせるにはRSpecが必要です。
 そうでない場合は特に必要ではありません。
 
 == INSTALL:
-
+$ git clone git://github.com/hiroeorz/named_attribute_parser.git
+$ cd named_attribute_parser
+$ rake package (if you build yourself)
+# sudo gem install pkg/named_attribute_parser-0.0.1.gem
 
 == LICENSE:
 
